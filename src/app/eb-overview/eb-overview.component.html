@@ -6,7 +6,9 @@
 
   <div
     *cdkVirtualFor="let item of list$ | async">
-    <div class="item-div">{{item}}</div>
+    <div class="item-div">{{item}}
+      <img async=on [attr.src]="getCoverUrl(item)">
+    </div>
   </div>
 
 </cdk-virtual-scroll-viewport>
