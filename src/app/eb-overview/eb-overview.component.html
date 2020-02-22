@@ -1,1 +1,12 @@
-<p>eb-overview works!</p>
+<cdk-virtual-scroll-viewport
+  itemSize="50"
+  minBufferPx="200"
+  maxBufferPx="400"
+  class="example-viewport">
+
+  <div
+    *cdkVirtualFor="let item of list$ | async">
+    <div class="item-div">{{item}}</div>
+  </div>
+
+</cdk-virtual-scroll-viewport>

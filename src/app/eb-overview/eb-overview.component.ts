@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {EbOverviewService} from './eb-overview.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-eb-overview',
@@ -7,10 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EbOverviewComponent implements OnInit {
 
-  constructor() {
+  private list$: Observable<string[]>;
+
+  constructor(private readonly overviewService: EbOverviewService) {
   }
 
   ngOnInit() {
+    this.list$ = this.overviewService.loadList();
   }
 
 }
