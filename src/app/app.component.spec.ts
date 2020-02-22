@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ebook-server-browser'`, () => {
+  it(`should have as title 'Ebooks'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ebook-server-browser');
+    expect(app.title).toEqual('Ebooks');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ebook-server-browser app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('Ebooks app is running!');
   });
 });

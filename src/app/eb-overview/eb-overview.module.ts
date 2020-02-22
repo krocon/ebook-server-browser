@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EbOverviewComponent} from './eb-overview.component';
-import {EbOverviewService} from './eb-overview.service';
+import {EbOverviewService} from './service/eb-overview.service';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
+import {EpOptionsModule} from '../ep-options/ep-options.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {BrowserModule} from '@angular/platform-browser';
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    ScrollingModule
+    ScrollingModule,
+    EpOptionsModule
   ],
   providers: [
     EbOverviewService

@@ -5,14 +5,14 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class EbOverviewService {
 
-  // static initUrl = 'http://localhost:8081/init.json';
   static listUrl = 'http://localhost:8081/0/files.json';
 
   constructor(private readonly http: HttpClient) {
   }
 
-  loadList(): Observable<string[]> {
-    return this.http.get<string[]>(EbOverviewService.listUrl);
+  loadList(sectionIdx: number = 0): Observable<string[]> {
+    const url = `http://localhost:8081/${sectionIdx}/files.json`;
+    return this.http.get<string[]>(url);
   }
 
 }

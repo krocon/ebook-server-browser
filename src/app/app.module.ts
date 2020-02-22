@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {EbOverviewModule} from './eb-overview/eb-overview.module';
 import {EbPageNotfoundModule} from './eb-page-not-found/eb-page-not-found.module';
+import {EpOptionsModule} from './ep-options/ep-options.module';
 
 @NgModule({
   declarations: [
@@ -34,10 +35,13 @@ import {EbPageNotfoundModule} from './eb-page-not-found/eb-page-not-found.module
     MatListModule,
 
     EbPageNotfoundModule,
-    EbOverviewModule
+    EbOverviewModule,
+    EpOptionsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {
 }
