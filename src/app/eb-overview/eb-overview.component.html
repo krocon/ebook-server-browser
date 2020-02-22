@@ -20,12 +20,27 @@
 </div>
 
 <cdk-virtual-scroll-viewport
-  itemSize="50"
+  #viewport
+  itemSize="dimension.height"
   minBufferPx="200"
   maxBufferPx="400"
   class="example-viewport">
 
+
   <div
+    *cdkVirtualFor="let item of list$ | async"
+    class="item-div"
+    [style.width.px]="dimension.width"
+    [style.height.px]="dimension.height"
+  >
+    <img [attr.src]="getCoverUrl(item)"
+         [attr.width]="dimension.width"
+         [attr.title]="item"
+    >
+  </div>
+
+
+  <!--div
     *cdkVirtualFor="let item of list$ | async" [style.height.px]="dimension.height">
 
     <div class="item-div" [attr.height]="dimension.height+'px'">
@@ -35,6 +50,6 @@
            [attr.title]="item"
       >
     </div>
-  </div>
+  </div-->
 
 </cdk-virtual-scroll-viewport>

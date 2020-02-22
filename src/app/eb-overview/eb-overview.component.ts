@@ -1,5 +1,5 @@
 /* tslint:disable:no-console */
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {EbOverviewService} from './service/eb-overview.service';
@@ -13,7 +13,7 @@ import {ThumbsDimIf} from '../ep-options/data/thumbs-dim.if';
   templateUrl: './eb-overview.component.html',
   styleUrls: ['./eb-overview.component.scss']
 })
-export class EbOverviewComponent implements OnInit {
+export class EbOverviewComponent implements OnInit, AfterViewInit {
 
   options: OptionsIf;
   section: SectionIf;
@@ -22,8 +22,13 @@ export class EbOverviewComponent implements OnInit {
   baseDir: string;
   sectionIdx = 0;
   serverAddress = environment.serverAddress;
+  itemsPerRow = 1;
 
+  @ViewChild('viewport', {static: true, read: ElementRef}) viewport: ElementRef;
+
+  private innerWidth: number;
   private list$: Observable<string[]>;
+
 
   constructor(
     private readonly overviewService: EbOverviewService,
@@ -48,9 +53,25 @@ export class EbOverviewComponent implements OnInit {
       });
   }
 
+  ngAfterViewInit() {
+    this.innerWidth = this.viewport.nativeElement.offsetWidth;
+    console.info('this.innerWidth', this.innerWidth); // TODO weg
+    this.calcItemsPerRow();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = event.target.innerWidth;
+    console.info('this.innerWidth', this.innerWidth); // TODO weg
+    this.calcItemsPerRow();
+  }
+
   getCoverUrl(item: string) {
     const img = item.replace(/\.[a-zA-Z]*$/g, '.jpg');
     return `${this.serverAddress + '/' + this.sectionIdx}/img/${img}`;
   }
 
+  private calcItemsPerRow() {
+    this.itemsPerRow = Math.floor(this.innerWidth / this.dimension.width);
+  }
 }

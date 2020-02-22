@@ -24,8 +24,11 @@
 cdk-virtual-scroll-viewport {
   width: 100%;
   height: calc(100% - 64px);
+
+  .item-div {
+    overflow: hidden;
+    float: left;
+  }
 }
 
-.item-div {
-  height: 3em;
-}
+
