@@ -1,10 +1,12 @@
+/* tslint:disable:no-console */
 import {Component, OnInit} from '@angular/core';
-import {EbOverviewService} from './service/eb-overview.service';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {EbOverviewService} from './service/eb-overview.service';
 import {EpOptionsService} from '../ep-options/service/ep-options.service';
 import {OptionsIf} from '../ep-options/data/options.if';
 import {SectionIf} from '../ep-options/data/section.if';
-import {environment} from '../../environments/environment';
+import {ThumbsDimIf} from '../ep-options/data/thumbs-dim.if';
 
 @Component({
   selector: 'app-eb-overview',
@@ -15,6 +17,8 @@ export class EbOverviewComponent implements OnInit {
 
   options: OptionsIf;
   section: SectionIf;
+  thumbsDims: ThumbsDimIf[];
+  dimension: ThumbsDimIf;
   baseDir: string;
   sectionIdx = 0;
   serverAddress = environment.serverAddress;
@@ -34,8 +38,11 @@ export class EbOverviewComponent implements OnInit {
         this.options = opt;
         this.section = this.options.sections[this.sectionIdx];
         this.baseDir = this.section.baseDir;
-        // tslint:disable-next-line:no-console
+        this.thumbsDims = this.section.thumbsDims;
+        this.dimension = this.thumbsDims[0];
+
         console.info('  > baseDir:', this.baseDir);
+        console.info('  > options:', this.options);
 
         this.list$ = this.overviewService.loadList(this.sectionIdx);
       });

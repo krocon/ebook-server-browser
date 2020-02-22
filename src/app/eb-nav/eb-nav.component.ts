@@ -11,8 +11,9 @@ import {map, shareReplay} from 'rxjs/operators';
 export class EbNavComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 2048px)')
     // .observe(Breakpoints.Handset)
-    .observe(Breakpoints.TabletLandscape)
+    // .observe(Breakpoints.TabletLandscape)
     .pipe(
       map(result => result.matches),
       shareReplay()

@@ -6,6 +6,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {EpOptionsModule} from '../ep-options/ep-options.module';
+import {MatInputModule, MatSelectModule} from '@angular/material';
 
 
 @NgModule({
@@ -17,6 +18,8 @@ import {EpOptionsModule} from '../ep-options/ep-options.module';
     BrowserModule,
     HttpClientModule,
     ScrollingModule,
+    MatSelectModule,
+    MatInputModule,
     EpOptionsModule
   ],
   providers: [

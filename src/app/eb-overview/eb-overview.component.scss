@@ -1,4 +1,26 @@
 
+.header-div {
+  position: fixed;
+  top: 4px;
+  left: 140px;
+  width: calc(100% - 140px);
+  z-index: 10;
+
+  .count-div {
+    display: inline-block;
+    min-width: 100px;
+    font-size: 20px;
+    span {
+      color: #ffca00;
+    }
+    margin-right: 100px;
+  }
+
+  mat-form-field {
+    margin-right: 32px;
+  }
+}
+
 cdk-virtual-scroll-viewport {
   width: 100%;
   height: calc(100% - 64px);

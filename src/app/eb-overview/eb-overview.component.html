@@ -1,3 +1,24 @@
+<div class="header-div">
+
+  <div class="count-div">
+    (<span>1234</span>/<span>1234</span>)
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Filter">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Thumb sizes</mat-label>
+    <mat-select [(value)]="dimension">
+      <mat-option
+        *ngFor="let dim of thumbsDims"
+        [value]="dim">{{dim.width}} x {{dim.height}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <cdk-virtual-scroll-viewport
   itemSize="50"
   minBufferPx="200"
@@ -5,9 +26,14 @@
   class="example-viewport">
 
   <div
-    *cdkVirtualFor="let item of list$ | async">
-    <div class="item-div">{{item}}
-      <img async=on [attr.src]="getCoverUrl(item)">
+    *cdkVirtualFor="let item of list$ | async" [style.height.px]="dimension.height">
+
+    <div class="item-div" [attr.height]="dimension.height+'px'">
+      <img async=on
+           [attr.src]="getCoverUrl(item)"
+           [attr.width]="dimension.width"
+           [attr.title]="item"
+      >
     </div>
   </div>
 
