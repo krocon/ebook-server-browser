@@ -1,4 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
+
   <mat-sidenav #drawer
                [attr.role]="'dialog'"
                [mode]="'over'"
@@ -11,8 +12,9 @@
       <a href="#" mat-list-item>Options</a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" [style.height.px]="57">
       <button
         (click)="drawer.toggle()"
         *ngIf="true"
@@ -25,6 +27,6 @@
     </mat-toolbar>
 
     <ng-content></ng-content>
-
   </mat-sidenav-content>
+
 </mat-sidenav-container>

@@ -6,14 +6,28 @@
   width: calc(100% - 140px);
   z-index: 3;
 
+  .mat-tab-group {
+    float: left;
+    margin-top: 5px;
+    margin-right: 50px;
+
+    .mat-tab-body-wrapper {
+      display: none
+    }
+  }
+
   .count-div {
     display: inline-block;
+    float: left;
+    padding-top: 12px;
     min-width: 100px;
     font-size: 20px;
+
     span {
       color: #ffca00;
     }
-    margin-right: 100px;
+
+    margin-right: 50px;
   }
 
   mat-form-field {

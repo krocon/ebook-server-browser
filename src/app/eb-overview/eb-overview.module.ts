@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 import {EbOverviewComponent} from './eb-overview.component';
 import {EbOverviewService} from './service/eb-overview.service';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {EpOptionsModule} from '../ep-options/ep-options.module';
-import {MatInputModule, MatSelectModule} from '@angular/material';
+import {MatInputModule, MatSelectModule, MatTabsModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
 
@@ -22,7 +22,8 @@ import {FormsModule} from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     EpOptionsModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ],
   providers: [
     EbOverviewService
