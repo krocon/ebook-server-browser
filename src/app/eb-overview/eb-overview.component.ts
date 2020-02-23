@@ -1,12 +1,12 @@
 /* tslint:disable:no-console */
 import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {EbOverviewService} from './service/eb-overview.service';
 import {EpOptionsService} from '../ep-options/service/ep-options.service';
 import {OptionsIf} from '../ep-options/data/options.if';
 import {SectionIf} from '../ep-options/data/section.if';
 import {ThumbsDimIf} from '../ep-options/data/thumbs-dim.if';
+import {takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'app-eb-overview',
@@ -26,8 +26,11 @@ export class EbOverviewComponent implements OnInit, AfterViewInit {
 
   @ViewChild('viewport', {static: true, read: ElementRef}) viewport: ElementRef;
 
-  private innerWidth: number;
-  private list$: Observable<string[]>;
+  innerWidth: number;
+  list: string[] = [];
+  filteredList: string[] = [];
+  // private list$: Observable<string[]>;
+  private alive = true;
 
 
   constructor(
@@ -39,30 +42,39 @@ export class EbOverviewComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataService
       .getOptions()
+      .pipe(
+        takeWhile(() => this.alive)
+      )
       .subscribe(opt => {
         this.options = opt;
         this.section = this.options.sections[this.sectionIdx];
         this.baseDir = this.section.baseDir;
         this.thumbsDims = this.section.thumbsDims;
-        this.dimension = this.thumbsDims[0];
+        this.dimension = this.thumbsDims[this.section.dimIndex];
 
         console.info('  > baseDir:', this.baseDir);
         console.info('  > options:', this.options);
 
-        this.list$ = this.overviewService.loadList(this.sectionIdx);
+        this.overviewService
+          .loadList(this.sectionIdx)
+          .pipe(
+            takeWhile(() => this.alive)
+          )
+          .subscribe(list => {
+            this.list = list;
+            this.filteredList = list;
+          });
       });
   }
 
   ngAfterViewInit() {
     this.innerWidth = this.viewport.nativeElement.offsetWidth;
-    console.info('this.innerWidth', this.innerWidth); // TODO weg
     this.calcItemsPerRow();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
-    console.info('this.innerWidth', this.innerWidth); // TODO weg
     this.calcItemsPerRow();
   }
 
@@ -72,6 +84,9 @@ export class EbOverviewComponent implements OnInit, AfterViewInit {
   }
 
   private calcItemsPerRow() {
+    if (!this.dimension || !this.innerWidth) {
+      return 1;
+    }
     this.itemsPerRow = Math.floor(this.innerWidth / this.dimension.width);
   }
 }

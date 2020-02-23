@@ -1,7 +1,7 @@
 <div class="header-div">
 
   <div class="count-div">
-    (<span>1234</span>/<span>1234</span>)
+    (<span>{{filteredList.length}}</span>/<span>{{list.length}}</span>)
   </div>
 
   <mat-form-field>
@@ -28,7 +28,7 @@
 
 
   <div
-    *cdkVirtualFor="let item of list$ | async"
+    *cdkVirtualFor="let item of filteredList"
     class="item-div"
     [style.width.px]="dimension.width"
     [style.height.px]="dimension.height"
