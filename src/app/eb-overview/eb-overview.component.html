@@ -31,6 +31,8 @@
   </mat-form-field>
 </div>
 
+<div *ngIf="loading" class="loading-div">Loading...</div>
+
 <cdk-virtual-scroll-viewport
   #viewport
   itemSize="dimension.height"

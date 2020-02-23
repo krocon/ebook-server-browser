@@ -32,6 +32,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   innerWidth: number;
   list: string[] = [];
   filteredList: string[] = [];
+  loading = false;
 
   private alive = true;
 
@@ -94,6 +95,8 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initialFilter = this.section.initialFilter;
     this.dimension = this.thumbsDims[this.section.dimIndex];
 
+    this.loading = true;
+
     setTimeout(() => {
       this.overviewService
         .loadList(this.sectionIdx)
@@ -102,6 +105,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
         )
         .subscribe(list => {
           this.list = list;
+          this.loading = false;
           this.applyFilter(this.initialFilter);
         });
     }, 500);

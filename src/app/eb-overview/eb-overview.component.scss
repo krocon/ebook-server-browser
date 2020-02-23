@@ -3,7 +3,7 @@
   position: fixed;
   top: 4px;
   left: 140px;
-  width: calc(100% - 140px);
+  width: calc(100vw - 140px);
   z-index: 3;
 
   .mat-tab-group {
@@ -20,7 +20,7 @@
     display: inline-block;
     float: left;
     padding-top: 12px;
-    min-width: 100px;
+    min-width: 130px;
     font-size: 20px;
 
     span {
@@ -33,6 +33,14 @@
   mat-form-field {
     margin-right: 32px;
   }
+}
+
+.loading-div {
+  position: fixed;
+  top: calc(50vh - 20px);
+  left: calc(50vw - 100px);
+  width: 200px;
+  text-align: center;
 }
 
 cdk-virtual-scroll-viewport {
