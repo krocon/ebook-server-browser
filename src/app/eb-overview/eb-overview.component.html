@@ -7,6 +7,7 @@
   <mat-tab-group
     [selectedIndex]="0"
     color="accent"
+    (selectedIndexChange)="setSection($event)"
   >
     <mat-tab
       *ngFor="let sec of options?.sections; let idx = $index"
@@ -47,20 +48,8 @@
     <img [attr.src]="getCoverUrl(item)"
          [attr.width]="dimension.width"
          [attr.title]="item"
+         crossorigin="anonymous"
     >
   </div>
-
-
-  <!--div
-    *cdkVirtualFor="let item of list$ | async" [style.height.px]="dimension.height">
-
-    <div class="item-div" [attr.height]="dimension.height+'px'">
-      <img async=on
-           [attr.src]="getCoverUrl(item)"
-           [attr.width]="dimension.width"
-           [attr.title]="item"
-      >
-    </div>
-  </div-->
 
 </cdk-virtual-scroll-viewport>

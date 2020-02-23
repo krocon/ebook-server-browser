@@ -32,7 +32,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   innerWidth: number;
   list: string[] = [];
   filteredList: string[] = [];
-  // private list$: Observable<string[]>;
+
   private alive = true;
 
 
@@ -50,24 +50,9 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe(opt => {
         this.options = opt;
-        this.section = this.options.sections[this.sectionIdx];
-        this.baseDir = this.section.baseDir;
-        this.thumbsDims = this.section.thumbsDims;
-        this.initialFilter = this.section.initialFilter;
-        this.dimension = this.thumbsDims[this.section.dimIndex];
-
+        this.initSection();
         console.info('  > baseDir:', this.baseDir);
         console.info('  > options:', this.options);
-
-        this.overviewService
-          .loadList(this.sectionIdx)
-          .pipe(
-            takeWhile(() => this.alive)
-          )
-          .subscribe(list => {
-            this.list = list;
-            this.applyFilter(this.initialFilter);
-          });
       });
   }
 
@@ -93,13 +78,39 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   applyFilter(text: string) {
     text = text.trim().toLowerCase();
-    this.filteredList = this.list.filter(s => s.indexOf(text) > -1);
+    this.filteredList = this.list.filter(s => s.toLowerCase().indexOf(text) > -1);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
     this.calcItemsPerRow();
+  }
+
+  initSection() {
+    this.section = this.options.sections[this.sectionIdx];
+    this.baseDir = this.section.baseDir;
+    this.thumbsDims = this.section.thumbsDims;
+    this.initialFilter = this.section.initialFilter;
+    this.dimension = this.thumbsDims[this.section.dimIndex];
+
+    setTimeout(() => {
+      this.overviewService
+        .loadList(this.sectionIdx)
+        .pipe(
+          takeWhile(() => this.alive)
+        )
+        .subscribe(list => {
+          this.list = list;
+          this.applyFilter(this.initialFilter);
+        });
+    }, 500);
+  }
+
+  setSection(idx: number) {
+    this.sectionIdx = idx;
+    this.filteredList = [];
+    this.initSection();
   }
 
   getCoverUrl(item: string) {
