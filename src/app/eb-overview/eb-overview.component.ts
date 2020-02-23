@@ -24,7 +24,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   sectionIdx = 0;
   serverAddress = environment.serverAddress;
   itemsPerRow = 1;
-  initialFilter = '';
+  filterText = '';
 
   @ViewChild('viewport', {static: true, read: ElementRef}) viewport: ElementRef;
   @ViewChild('filter', {static: true, read: ElementRef}) filter: ElementRef;
@@ -92,7 +92,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.section = this.options.sections[this.sectionIdx];
     this.baseDir = this.section.baseDir;
     this.thumbsDims = this.section.thumbsDims;
-    this.initialFilter = this.section.initialFilter;
+    this.filterText = this.section.initialFilter;
     this.dimension = this.thumbsDims[this.section.dimIndex];
 
     this.loading = true;
@@ -106,7 +106,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
         .subscribe(list => {
           this.list = list;
           this.loading = false;
-          this.applyFilter(this.initialFilter);
+          this.applyFilter(this.filterText);
         });
     }, 500);
   }

@@ -6,7 +6,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {EpOptionsModule} from '../ep-options/ep-options.module';
-import {MatInputModule, MatSelectModule, MatTabsModule} from '@angular/material';
+import {MatIconModule, MatInputModule, MatSelectModule, MatTabsModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
 
@@ -23,7 +23,8 @@ import {FormsModule} from '@angular/forms';
     MatInputModule,
     EpOptionsModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule
   ],
   providers: [
     EbOverviewService

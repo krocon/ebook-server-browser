@@ -18,7 +18,8 @@
 
   <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input #filter matInput [ngModel]="initialFilter" placeholder="Filter" autocomplete="off">
+    <input #filter matInput [ngModel]="filterText" placeholder="" autocomplete="off">
+    <i matSuffix class="material-icons" (click)="filterText=''">clear</i>
   </mat-form-field>
 
   <mat-form-field>
@@ -29,6 +30,8 @@
         [value]="dim">{{dim.width}} x {{dim.height}}</mat-option>
     </mat-select>
   </mat-form-field>
+
+<!--  <i class="material-icons fullscreen">fullscreen</i>-->
 </div>
 
 <div *ngIf="loading" class="loading-div">Loading...</div>
