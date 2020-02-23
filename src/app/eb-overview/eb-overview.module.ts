@@ -7,6 +7,7 @@ import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {EpOptionsModule} from '../ep-options/ep-options.module';
 import {MatInputModule, MatSelectModule} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatInputModule, MatSelectModule} from '@angular/material';
     ScrollingModule,
     MatSelectModule,
     MatInputModule,
-    EpOptionsModule
+    EpOptionsModule,
+    FormsModule
   ],
   providers: [
     EbOverviewService
