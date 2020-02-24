@@ -38,23 +38,22 @@
 
 <cdk-virtual-scroll-viewport
   #viewport
-  itemSize="dimension.height"
-  minBufferPx="200"
-  maxBufferPx="400"
-  class="example-viewport">
-
+  [itemSize]="dimension.height">
 
   <div
-    *cdkVirtualFor="let item of filteredList"
-    class="item-div"
-    [style.width.px]="dimension.width"
-    [style.height.px]="dimension.height"
-  >
-    <img [attr.src]="getCoverUrl(item)"
-         [attr.width]="dimension.width"
-         [attr.title]="item"
-         crossorigin="anonymous"
-    >
+    *cdkVirtualFor="let row of filteredDummyList"
+    [style.height.px]="dimension.height">
+    <div
+      *ngFor="let item of row;"
+      class="item-div"
+      [style.height.px]="dimension.height"
+      [style.width.px]="dimension.width">
+
+      <img [attr.src]="getCoverUrl(item)"
+           [attr.width]="dimension.width"
+           [attr.title]="item"
+           crossorigin="anonymous">
+    </div>
   </div>
 
 </cdk-virtual-scroll-viewport>

@@ -33,7 +33,6 @@ import {EpOptionsModule} from './ep-options/ep-options.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
     EbPageNotfoundModule,
     EbOverviewModule,
     EpOptionsModule

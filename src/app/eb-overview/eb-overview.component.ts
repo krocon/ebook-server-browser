@@ -32,6 +32,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   innerWidth: number;
   list: string[] = [];
   filteredList: string[] = [];
+  filteredDummyList: string[][] = [];
   loading = false;
 
   private alive = true;
@@ -80,6 +81,7 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
   applyFilter(text: string) {
     text = text.trim().toLowerCase();
     this.filteredList = this.list.filter(s => s.toLowerCase().indexOf(text) > -1);
+    this.calcItemsPerRow();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -124,9 +126,23 @@ export class EbOverviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private calcItemsPerRow() {
     if (!this.dimension || !this.innerWidth) {
-      return 1;
+      this.itemsPerRow = 1;
+    } else {
+      this.itemsPerRow = Math.floor(this.innerWidth / this.dimension.width);
     }
-    this.itemsPerRow = Math.floor(this.innerWidth / this.dimension.width);
+    const rowCount = Math.round(0.5 + (this.filteredList.length ? this.filteredList.length / this.itemsPerRow : 0));
+    this.filteredDummyList = new Array(rowCount)
+      .fill(1)
+      .map((v, i) => {
+        const arr = [];
+        for (let j = 0; j < this.itemsPerRow; j++) {
+          const k = i * this.itemsPerRow + j;
+          if (k < this.filteredList.length) {
+            arr.push(this.filteredList[k]);
+          }
+        }
+        return arr;
+      });
   }
 
 }
